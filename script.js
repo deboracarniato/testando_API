@@ -14,4 +14,20 @@ botaoBuscar.addEventListener("click", async function(){
     if (cidade == ""){
         return;
     }
+
+    const dados = await buscarclima(cidade);
+
+    if (dados.cod === "404"){
+        divResultado.innerHTML = "<p>Cidade não encontrada.</p>";
+        return;
+    }
+
+    divResultado.innerHTML = `
+        <div class= "card-clima">
+            <h3>$(dados.name)</h3>
+            <p>$(dados.weather[0].description)</p>
+            <p><strong>$(dados.main.temp)ºC</strong></p>
+            <p>Sensação: $(dados.main.feels_like)ºC</p>
+        </div>
+    `
 })
