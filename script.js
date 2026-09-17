@@ -8,6 +8,7 @@ async function buscarclima(cidade){
 const botaoBuscar = document.getElementById("btnBuscar");
 const campoCidade = document.getElementById("cidade");
 const divResultado = document.getElementById("resultado");
+const divPrevisao = document.getElementById();
 
 botaoBuscar.addEventListener("click", async function(){
     const cidade = campoCidade.value;
@@ -22,6 +23,14 @@ botaoBuscar.addEventListener("click", async function(){
         divResultado.innerHTML = "<p>Cidade não encontrada.</p>";
         return;
     }
+
+    async function buscarPrevisao(cidade){
+       const url = `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${CHAVE_API}&units=metric&lang=pt_br`
+       const resposta = await fetch(url);
+       const dados = await resposta.json()
+       return dados; 
+    }
+
 
     divResultado.innerHTML = `
         <div class= "card-clima">
