@@ -54,13 +54,25 @@ botaoBuscar.addEventListener("click", async function(){
     function montarPrevisao(previsao){
         divPrevisao.InnerHTML = "";
 
-        if (item.dt_txt.includes(12:00:00)){
+
+        for(let i = 0; i < previsao.list.length; i++ ){
+            const item = previsao.list[i];
+
+            if (item.dt_txt.includes(12:00:00)){
             const data = new Date(item.dt.txt);
             const diaSemana = data.toDateString("pt-BR", {weekday: "shot"});
             const iconeUrl = `https://openweathermap.org/img/wn/${item.weather[0].icon}.png`;
 
-            divPrevisao += ``
+            divPrevisao.innerHTML += `
+                <div class="dia-previsao">
+                  <p>${diaSemana}</p>
+                  <img src="${iconeURL}" alt="${item.weather[0].description}
+                  <p>${item.main.temp.toFixed(0)}ºc</p>
+                </div>
+            `
         }
+        }
+
     }
 
     async function buscarPrevisao(cidade){
